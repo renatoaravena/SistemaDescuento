@@ -1,21 +1,31 @@
+/*
+  Clase principal para demostrar el uso de los patrones Decorator y Command.
+ */
+
 public class Main {
-
     public static void main(String[] args) {
-
-        // Crear una instancia de DiscountManager
+        // Usando el DiscountManager singleton
         DiscountManager discountManager = DiscountManager.getInstance();
 
-        // Precio original del producto
-        int precioOriginal = 10000;
+        // Crear un producto
+        Component producto = new Producto("Camisa", 10000);
+        System.out.println("Producto original: " + producto.getDescripcion());
+        System.out.println("Precio original: " + producto.getPrecio());
 
-        // Aplicar un descuento usando un código promocional
-        String codigoPromocional = "PROMO20";
-        double precioConDescuento = discountManager.aplicarDescuento(precioOriginal, codigoPromocional);
+        // Aplicar descuento usando codigo promocional con DiscountManager (Decorator)
+        Component productoConDescuento = discountManager.aplicarDescuento(producto, "PROMO20");
+        System.out.println("Producto con descuento: " + productoConDescuento.getDescripcion());
+        System.out.println("Precio con descuento: " + productoConDescuento.getPrecio());
 
-        // Mostrar el precio con descuento
-        System.out.println("Precio original: " + precioOriginal);
-        System.out.printf("Precio con descuento (%s): %.0f%n", codigoPromocional, precioConDescuento);
+        // Usando Command para aplicar descuentos
+        Command comandoDescuento10 = new AplicarDescuentoPorcentajeCommand(producto, 10);
+        Component productoConDescuento10 = comandoDescuento10.ejecutar();
+        System.out.println("Producto con descuento 10%: " + productoConDescuento10.getDescripcion());
+        System.out.println("Precio con descuento 10%: " + productoConDescuento10.getPrecio());
 
-
+        Command comandoDescuentoFijo = new AplicarDescuentoFijoCommand(producto, 2000);
+        Component productoConDescuentoFijo = comandoDescuentoFijo.ejecutar();
+        System.out.println("Producto con descuento fijo: " + productoConDescuentoFijo.getDescripcion());
+        System.out.println("Precio con descuento fijo: " + productoConDescuentoFijo.getPrecio());
     }
 }
