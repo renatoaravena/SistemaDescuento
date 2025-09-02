@@ -7,6 +7,11 @@ public abstract class Decorator implements Component {
     protected Component componente;
 
     public Decorator(Component componente) {
+
+        if (componente == null){
+            throw new IllegalArgumentException("El componente no puede ser nulo.");
+        }
+
         this.componente = componente;
     }
 
@@ -16,7 +21,18 @@ public abstract class Decorator implements Component {
     }
 
     @Override
-    public String getDescripcion() {
-        return componente.getDescripcion();
+    public String getNombre() {
+        return componente.getNombre();
     }
+
+    @Override
+    public String getCategoria() {
+        return componente.getCategoria();
+    }
+
+    @Override
+    public String getId() {
+        return componente.getId();
+    }
+
 }

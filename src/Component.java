@@ -1,7 +1,9 @@
 /*
- * Interfaz Component define los métodos comunes para todos los componentes
- * en el patrón Decorator. Esta interfaz representa los productos de la tienda
- * y define las operaciones básicas que deben implementar todos los componentes(Productos).
+
+  Interfaz Component define los métodos comunes para todos los componentes
+  en el patrón Decorator. Esta interfaz representa los productos de la tienda
+  y define las operaciones básicas que deben implementar todos los componentes(Productos).
+
  */
 
 public interface Component {
@@ -10,8 +12,15 @@ public interface Component {
 
     double getPrecio();
 
-
 //     Obtiene la descripción del producto
 
-    String getDescripcion();
+    String getNombre();
+
+//    Obtiene la categoría del producto
+
+    String getCategoria();
+
+//    Obtiene el ID del producto
+    String getId();
+
 }
